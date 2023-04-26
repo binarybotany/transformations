@@ -41,10 +41,10 @@ void RotatingCube::Render() {
 const char *RotatingCube::vss = R"(
 #version 330 core
 
-layout (location = 0) vec3 a_positions;
+layout (location = 0) in vec3 a_positions;
 
 void main() {
-  gl_Position = vec4(a_positions.x, a_positions.y, a_positions.z, 1.0);
+  gl_Position = vec4(a_positions, 1.0);
 }
 )";
 
@@ -54,6 +54,6 @@ const char *RotatingCube::fss = R"(
 out vec4 fragment_color;
 
 void main() {
-  fragment_color = vec4(0.0, 0.5, 0.5, 1.0);
+  fragment_color = vec4(0.0, 1.0, 1.0, 1.0);
 }
 )";
