@@ -22,6 +22,14 @@ class RotatingCube {
  private:
   RenderingProgram program;
   GLuint vao, vbo, ebo;
+
+  GLfloat vertices[18] = {
+      -0.5f, 0.5f,  0.0f, -0.5f, -0.5f, 0.0f, 0.5f, 0.5f, 0.0f,
+      -0.5f, -0.5f, 0.0f, 0.5f,  -0.5f, 0.0f, 0.5f, 0.5f, 0.0f,
+  };
+
+  static const char *vss;
+  static const char *fss;
 };
 
 #endif

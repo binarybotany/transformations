@@ -3,15 +3,24 @@
 
 #include <glad/glad.h>
 
+#include <iostream>
+#include <vector>
+
 class RenderingProgram {
  public:
-  RenderingProgram() {}
-  ~RenderingProgram() {}
+  RenderingProgram();
+  ~RenderingProgram();
+
+  void AddShader(GLenum type, const GLchar *source);
+
+  void Link();
 
   void Use();
 
  private:
   GLuint id;
+
+  std::vector<GLuint> shaders;
 };
 
 #endif
