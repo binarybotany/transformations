@@ -3,6 +3,8 @@
 
 #include <glad/glad.h>
 
+#include "rendering_program.h"
+
 class RotatingCube {
  public:
   RotatingCube() {}
@@ -18,6 +20,7 @@ class RotatingCube {
   void Render();
 
  private:
+  RenderingProgram program;
   GLuint vao, vbo, ebo;
 };
 
