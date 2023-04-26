@@ -5,21 +5,37 @@
 void RotatingCube::Initialize() {
   program.AddShader(GL_VERTEX_SHADER, vss);
   program.AddShader(GL_FRAGMENT_SHADER, fss);
-  program.Link();
 
-  glGenBuffers(1, &vbo);
+  program.Link();
+  program.Use();
 
   glGenVertexArrays(1, &vao);
-  // ...continue
+  glGenBuffers(1, &vbo);
+
+  glBindVertexArray(vao);
+
+  glBindBuffer(GL_ARRAY_BUFFER, vbo);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat),
+                        (void *)0);
+  glEnableVertexAttribArray(0);
+
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
+  glBindVertexArray(0);
 }
 
-void RotatingCube::Terminate() {}
+void RotatingCube::Terminate() {
+  glDeleteVertexArrays(1, &vao);
+  glDeleteBuffers(1, &vbo);
+}
 
 void RotatingCube::Update() {}
 
 void RotatingCube::Render() {
   program.Use();
-  // glDrawArrays(GL_TRIANGLES, 0, 6); // <-
+  glBindVertexArray(vao);
+  glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
 const char *RotatingCube::vss = R"(

@@ -7,8 +7,8 @@
 #include <exception>
 #include <iostream>
 
-#include "window_data.h"
 #include "rotating_cube.h"
+#include "window_data.h"
 
 class RenderingContext {
  public:
@@ -28,6 +28,11 @@ class RenderingContext {
 
   static void KeyCallback(GLFWwindow* window, int key, int scancode, int action,
                           int mods);
+
+  static void DebugMessageCallback(GLenum source, GLenum type, GLuint id,
+                                   GLenum severity, GLsizei length,
+                                   const GLchar* message,
+                                   const void* userParam);
 
   GLFWwindow* window = nullptr;
 };

@@ -26,10 +26,14 @@ void RenderingContext::Initialize() {
       throw std::runtime_error("Unable to initialize context");
     }
 
-    glViewport(0, 0, window_data.width, window_data.height);
   } catch (std::runtime_error& error) {
     std::cerr << error.what() << std::endl;
   }
+
+  glViewport(0, 0, window_data.width, window_data.height);
+
+  glEnable(GL_DEBUG_OUTPUT);
+  glDebugMessageCallback((GLDEBUGPROC)DebugMessageCallback, nullptr);
 }
 
 void RenderingContext::Terminate() {
@@ -69,4 +73,12 @@ void RenderingContext::KeyCallback(GLFWwindow* window, int key, int scancode,
   if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
     glfwSetWindowShouldClose(window, GLFW_TRUE);
   }
+}
+
+void RenderingContext::DebugMessageCallback(GLenum source, GLenum type,
+                                            GLuint id, GLenum severity,
+                                            GLsizei length,
+                                            const GLchar* message,
+                                            const void* userParam) {
+  std::cout << message << std::endl;
 }
