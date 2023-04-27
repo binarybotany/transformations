@@ -17,6 +17,8 @@ class RenderingProgram {
 
   void Use();
 
+  GLuint Id();
+
  private:
   GLuint id;
 

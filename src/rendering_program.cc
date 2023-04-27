@@ -45,3 +45,5 @@ void RenderingProgram::Link() {
 }
 
 void RenderingProgram::Use() { glUseProgram(id); }
+
+GLuint RenderingProgram::Id() { return id; }

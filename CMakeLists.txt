@@ -14,5 +14,7 @@ set(EXTERN_DIR ${PROJECT_SOURCE_DIR}/extern)
 
 add_subdirectory(${EXTERN_DIR}/glad)
 add_subdirectory(${EXTERN_DIR}/glfw)
+add_subdirectory(${EXTERN_DIR}/glm)
+add_subdirectory(${EXTERN_DIR}/stbi)
 
 add_subdirectory(src bin)
