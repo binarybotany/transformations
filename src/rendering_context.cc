@@ -32,6 +32,8 @@ void RenderingContext::Initialize() {
 
   glViewport(0, 0, window_data.width, window_data.height);
 
+  glEnable(GL_DEPTH_TEST);
+
   glEnable(GL_DEBUG_OUTPUT);
   glDebugMessageCallback(DebugMessageCallback, nullptr);
 }
@@ -49,12 +51,12 @@ void RenderingContext::Loop() {
   cube.Initialize();
 
   glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-  
+
   while (!glfwWindowShouldClose(window)) {
     glfwPollEvents();
 
-    glClear(GL_COLOR_BUFFER_BIT /*| GL_DEPTH_BUFFER_BIT*/);
-    
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
     cube.Update();
     cube.Render();
 
