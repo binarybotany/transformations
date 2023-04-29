@@ -6,7 +6,9 @@
 
 #include <exception>
 #include <iostream>
+#include <vector>
 
+#include "camera.h"
 #include "rotating_cube.h"
 #include "window_data.h"
 
@@ -29,12 +31,30 @@ class RenderingContext {
   static void KeyCallback(GLFWwindow* window, int key, int scancode, int action,
                           int mods);
 
+  static void CursorPosCallback(GLFWwindow* window, double xpos, double ypos);
+
+  static void ScrollCallback(GLFWwindow* window, double xoffset,
+                             double yoffset);
+
   static void DebugMessageCallback(GLenum source, GLenum type, GLuint id,
                                    GLenum severity, GLsizei length,
                                    const GLchar* message,
                                    const void* userParam);
 
+  void ProcessInput();
+
+  void CalculateDeltaTime();
+
   GLFWwindow* window = nullptr;
+
+  float delta_time = 0.0f;
+  float last_frame = 0.0f;
+
+  static float yaw;
+  static float pitch;
+
+  static float last_x;
+  static float last_y;
 };
 
 #endif
