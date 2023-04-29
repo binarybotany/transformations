@@ -1,15 +1,15 @@
-#ifndef CUBE_H
-#define CUBE_H
+#ifndef LIGHT_CUBE_H
+#define LIGHT_CUBE_H
 
 #include <glad/glad.h>
 
 #include "camera.h"
 #include "rendering_program.h"
 
-class Cube {
+class LightCube {
  public:
-  Cube() {}
-  ~Cube() {}
+  LightCube() {}
+  ~LightCube() {}
 
   void Initialize();
 

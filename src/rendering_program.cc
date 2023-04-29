@@ -42,8 +42,38 @@ void RenderingProgram::Link() {
   for (GLuint shader : shaders) {
     glDeleteShader(shader);
   }
+
+  u_model = glGetUniformLocation(id, "model");
+  u_view = glGetUniformLocation(id, "view");
+  u_projection = glGetUniformLocation(id, "projection");
 }
 
 void RenderingProgram::Use() { glUseProgram(id); }
 
 GLuint RenderingProgram::Id() { return id; }
+
+void RenderingProgram::SetModel(glm::mat4 model) {
+  Use();
+  glUniformMatrix4fv(u_model, 1, GL_FALSE, glm::value_ptr(model));
+}
+
+void RenderingProgram::SetView(glm::mat4 view) {
+  Use();
+  glUniformMatrix4fv(u_view, 1, GL_FALSE, glm::value_ptr(view));
+}
+
+void RenderingProgram::SetProjection(glm::mat4 projection) {
+  Use();
+  glUniformMatrix4fv(u_projection, 1, GL_FALSE, glm::value_ptr(projection));
+}
+
+void RenderingProgram::SetMat4(const char *name, glm::mat4 value) {
+  Use();
+  glUniformMatrix4fv(glGetUniformLocation(id, name), 1, GL_FALSE,
+                     glm::value_ptr(value));
+}
+
+void RenderingProgram::SetVec3(const char *name, glm::vec3 value) {
+  Use();
+  glUniform3fv(glGetUniformLocation(id, name), 1, glm::value_ptr(value));
+}

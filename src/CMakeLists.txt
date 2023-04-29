@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.4...3.20 FATAL_ERROR)
 set(HEADERS 
     camera.h
     cube.h
+    light_cube.h
     rendering_context.h 
     rendering_program.h 
     rotating_cube.h 
@@ -11,6 +12,7 @@ set(HEADERS
 set(SOURCES 
     camera.cc
     cube.cc
+    light_cube.cc
     rendering_context.cc 
     rendering_program.cc 
     rotating_cube.cc)

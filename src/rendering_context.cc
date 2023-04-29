@@ -62,20 +62,11 @@ void RenderingContext::Terminate() {
 void RenderingContext::Loop() {
   Camera::Instance()->Initialize();
 
-  std::vector<RotatingCube> cubes;
+  Cube cube{};
+  cube.Initialize();
 
-  glm::vec3 cube_positions[] = {
-      glm::vec3(0.0f, 0.0f, 0.0f),    glm::vec3(2.0f, 5.0f, -15.0f),
-      glm::vec3(-1.5f, -2.2f, -2.5f), glm::vec3(-3.8f, -2.0f, -12.3f),
-      glm::vec3(2.4f, -0.4f, -3.5f),  glm::vec3(-1.7f, 3.0f, -7.5f),
-      glm::vec3(1.3f, -2.0f, -2.5f),  glm::vec3(1.5f, 2.0f, -2.5f),
-      glm::vec3(1.5f, 0.2f, -1.5f),   glm::vec3(-1.3f, 1.0f, -1.5f)};
-
-  for (auto position : cube_positions) {
-    RotatingCube cube{position};
-    cube.Initialize();
-    cubes.push_back(cube);
-  }
+  LightCube light_cube{};
+  light_cube.Initialize();
 
   glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
@@ -88,17 +79,17 @@ void RenderingContext::Loop() {
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    for (auto cube : cubes) {
-      cube.Update();
-      cube.Render();
-    }
+    cube.Update();
+    cube.Render();
+
+    light_cube.Update();
+    light_cube.Render();
 
     glfwSwapBuffers(window);
   }
 
-  for (auto cube : cubes) {
-    cube.Terminate();
-  }
+  cube.Terminate();
+  light_cube.Terminate();
 
   Camera::Instance()->Terminate();
 }

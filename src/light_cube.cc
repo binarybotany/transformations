@@ -1,6 +1,6 @@
-#include "cube.h"
+#include "light_cube.h"
 
-void Cube::Initialize() {
+void LightCube::Initialize() {
   program = new RenderingProgram();
 
   program->AddShader(GL_VERTEX_SHADER, vss);
@@ -24,30 +24,32 @@ void Cube::Initialize() {
   glBindVertexArray(0);
 }
 
-void Cube::Terminate() {
+void LightCube::Terminate() {
   if (program != nullptr) delete program;
   glDeleteVertexArrays(1, &vao);
   glDeleteBuffers(1, &vbo);
 }
 
-void Cube::Update() {
+void LightCube::Update() {
+  glm::vec3 light_position(1.2f, 1.0f, 2.0f);
+
   glm::mat4 model{1.0f};
+  model = glm::translate(model, light_position);
+  model = glm::scale(model, glm::vec3(0.2f));
+
   program->SetModel(model);
   program->SetView(Camera::Instance()->View());
   program->SetProjection(Camera::Instance()->Projection());
-
-  program->SetVec3("object_color", glm::vec3(1.0f, 0.5f, 0.31f));
-  program->SetVec3("light_color", glm::vec3(1.0f, 1.0f, 1.0f));
 }
 
-void Cube::Render() {
+void LightCube::Render() {
   program->Use();
   glBindVertexArray(vao);
   glDrawArrays(GL_TRIANGLES, 0, 36);
   glBindVertexArray(0);
 }
 
-const GLchar *Cube::vss = R"(
+const GLchar *LightCube::vss = R"(
 #version 330 core
 
 layout (location = 0) in vec3 a_position;
@@ -61,15 +63,12 @@ void main() {
 }
 )";
 
-const GLchar *Cube::fss = R"(
+const GLchar *LightCube::fss = R"(
 #version 330 core
 
 out vec4 fragment_color;
 
-uniform vec3 object_color;
-uniform vec3 light_color;
-
 void main() {
-    fragment_color = vec4(light_color * object_color, 1.0);
+    fragment_color = vec4(1.0, 1.0, 1.0, 1.0);
 }
 )";

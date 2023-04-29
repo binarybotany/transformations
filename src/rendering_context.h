@@ -9,7 +9,8 @@
 #include <vector>
 
 #include "camera.h"
-#include "rotating_cube.h"
+#include "cube.h"
+#include "light_cube.h"
 #include "window_data.h"
 
 class RenderingContext {
