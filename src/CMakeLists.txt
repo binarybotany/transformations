@@ -4,6 +4,7 @@ set(HEADERS
     camera.h
     cube.h
     light_cube.h
+    material.h
     rendering_context.h 
     rendering_program.h 
     rotating_cube.h 

@@ -16,7 +16,7 @@ void LightCube::Initialize() {
   glBindBuffer(GL_ARRAY_BUFFER, vbo);
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat),
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat),
                         (GLvoid *)0);
   glEnableVertexAttribArray(0);
 
@@ -30,9 +30,7 @@ void LightCube::Terminate() {
   glDeleteBuffers(1, &vbo);
 }
 
-void LightCube::Update() {
-  glm::vec3 light_position(1.2f, 1.0f, 2.0f);
-
+void LightCube::Update(const glm::vec3 &light_position) {
   glm::mat4 model{1.0f};
   model = glm::translate(model, light_position);
   model = glm::scale(model, glm::vec3(0.2f));

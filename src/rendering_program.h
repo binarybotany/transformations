@@ -27,6 +27,8 @@ class RenderingProgram {
 
   void SetProjection(glm::mat4 projection);
 
+  void SetFloat(const char *name, const GLfloat value);
+
   void SetMat4(const char *name, glm::mat4 value);
 
   void SetVec3(const char *name, glm::vec3 value);

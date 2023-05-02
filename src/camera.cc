@@ -13,7 +13,10 @@ Camera* Camera::Instance() {
   return instance;
 }
 
-void Camera::Initialize() {
+void Camera::Initialize(int window_width, int window_height) {
+  width = (float)window_width;
+  height = (float)window_height;
+
   position = glm::vec3(0.0f, 0.0f, 3.0f);
   front = glm::vec3(0.0f, 0.0f, -1.0f);
   up = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -41,8 +44,12 @@ void Camera::SetFieldOfView(float value) {
   if (fov > 45.0f) fov = 45.0f;
 }
 
-glm::mat4 Camera::View() { return glm::lookAt(position, position + front, up); }
-
-glm::mat4 Camera::Projection() {
-  return glm::perspective(glm::radians(fov), 1024.0f / 768.0f, 0.1f, 100.0f);
+glm::mat4 Camera::View() const {
+  return glm::lookAt(position, position + front, up);
 }
+
+glm::mat4 Camera::Projection() const {
+  return glm::perspective(glm::radians(fov), width / height, 0.1f, 100.0f);
+}
+
+glm::vec3 Camera::Position() const { return position; }

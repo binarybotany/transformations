@@ -11,6 +11,7 @@
 #include "camera.h"
 #include "cube.h"
 #include "light_cube.h"
+#include "material.h"
 #include "window_data.h"
 
 class RenderingContext {
@@ -56,6 +57,8 @@ class RenderingContext {
 
   static float last_x;
   static float last_y;
+
+  int width, height;
 };
 
 #endif

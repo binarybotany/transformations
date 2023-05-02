@@ -13,7 +13,7 @@ class Camera {
 
   static Camera *Instance();
 
-  void Initialize();
+  void Initialize(int width, int height);
 
   void Terminate();
 
@@ -29,9 +29,11 @@ class Camera {
 
   void SetFieldOfView(float value);
 
-  glm::mat4 View();
+  glm::mat4 View() const;
 
-  glm::mat4 Projection();
+  glm::mat4 Projection() const;
+
+  glm::vec3 Position() const;
 
  protected:
   Camera() {}
@@ -40,6 +42,8 @@ class Camera {
  private:
   static Camera *instance;
   static std::mutex mutex;
+
+  float width = 1.0f, height = 1.0f;
 
   glm::vec3 position{1.0f};
   glm::vec3 front{1.0f};

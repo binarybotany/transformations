@@ -67,6 +67,11 @@ void RenderingProgram::SetProjection(glm::mat4 projection) {
   glUniformMatrix4fv(u_projection, 1, GL_FALSE, glm::value_ptr(projection));
 }
 
+void RenderingProgram::SetFloat(const char *name, const GLfloat value) {
+  Use();
+  glUniform1f(glGetUniformLocation(id, name), value);
+}
+
 void RenderingProgram::SetMat4(const char *name, glm::mat4 value) {
   Use();
   glUniformMatrix4fv(glGetUniformLocation(id, name), 1, GL_FALSE,
